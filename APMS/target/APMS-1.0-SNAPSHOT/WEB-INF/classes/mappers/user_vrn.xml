@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="uservrnmapper">
+    <insert id="insertUserVRN" parameterType="com.tudublin.apms.entity.UserVRN">
+        INSERT INTO `details_vrn` (`details_id`, `vehicle_reg_no`,`comment`)
+        VALUES (#{detailsId},#{vehicleRegNo},#{comment});
+    </insert>
+
+    <select id="selectVRNByDid" parameterType="Long" resultType="com.tudublin.apms.entity.UserVRN">
+        select * from details_vrn where details_id = #{value}
+    </select>
+
+    <delete id="deleteVRNByDvId" parameterType="Long">
+        delete from details_vrn
+        where dv_id = #{value}
+    </delete>
+</mapper>

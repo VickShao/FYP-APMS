@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay Parking Fee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="assets/axios/axios.js"></script>
+    <!-- 导入样式 -->
+    <link rel="stylesheet" type="text/css" href="assets/element-plus/index.css">
+    <!-- 导入 Vue 3 -->
+    <script src="assets/vue/vue.global.js"></script>
+    <!-- 导入组件库 -->
+    <script src="assets/element-plus/index.full.js"></script>
+    <style>
+        .content{
+            width: 100%;
+            height: 200px;
+            margin: auto;
+            text-align: center;
+        }
+        .content h1{
+            font-size: 70px;
+            margin-top: 200px;
+        }
+        .content h2{
+            font-size: 30px;
+        }
+        .login-box {
+            /*border: 1px solid #DCDFE6;*/
+            width: 600px;
+            margin:  auto;
+            padding: 35px 35px 15px 35px;
+            /*border-radius: 5px;*/
+            /*-webkit-border-radius: 5px;*/
+            /*-moz-border-radius: 5px;*/
+            /*box-shadow: 0 0 25px #909399;*/
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Welcome to AMPS</h1>
+        <br>
+        <br>
+        <br>
+        <h2>Please enter your vehicle register number:</h2>
+    </div>
+    <div id="app">
+        <el-form ref="loginForm" label-width="0px" :rules="rules" :model="form" class="login-box">
+
+            <el-form-item  prop="vrn">
+                <el-input type="text" placeholder="" v-model="form.vrn" ></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" v-on:click="onSubmit('loginForm')" style="margin:auto; width: 150px; height: 50px;">Next</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+    <script>
+        const Main = {
+            data() {
+                return {
+                    form: {
+                        vrn: ''
+                    }
+                    ,rules:{
+                        vrn:[
+                            {required:true, message:'Vehicle Register No cannot be empty', trigger:'blur'}
+                        ]
+                    }
+                }
+            }
+
+            ,methods:{
+                onSubmit(formName){
+                    const form = this.$refs[formName];
+                    form.validate((valid)=>{
+                        if(valid){
+                            console.info("from verify success, ready to submit");
+                            const form = this.form;
+                            // const params = new URLSearchParams();
+                            // const $message = this.$message;
+                            // params.append("vrn", form.vrn);
+                            // axios.post("/api/driver_parking_history_unpaid", params,{}).then(function(response){
+                            //     console.info(response);
+                            //     const json = response.data;
+                            //     if(json.code=="0"){
+                            //
+                            //     }else{
+                            //         $message.error({message:json.message, offset:100})
+                            //     }
+                            // });
+                            window.location.href = "/pay_fee_guest.html?vrn="+form.vrn;
+                        }
+                    })
+                }
+            }
+        };
+        //初始化Vue，绑定Main中的数据，利用ElementPlus对#app容器进行重新渲染
+        const app = Vue.createApp(Main);
+        app.use(ElementPlus);
+        app.mount("#app");
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userpaymentmapper">
+    <insert id="insertUserPayment" parameterType="com.tudublin.apms.entity.UserPayment">
+        INSERT INTO `details_payment` (`details_id`, `card_no`,`card_name`,`expired_date`,`cvv`)
+        VALUES (#{detailsId},#{cardNo},#{cardName},#{expiredDate},#{cvv});
+    </insert>
+
+    <select id="selectPayment" parameterType="Long" resultType="com.tudublin.apms.entity.UserPayment">
+        select * from details_payment where details_id = #{value}
+    </select>
+
+    <delete id="deletePaymentByDpId" parameterType="Long">
+        delete from details_payment
+        where dp_id = #{value}
+    </delete>
+</mapper>

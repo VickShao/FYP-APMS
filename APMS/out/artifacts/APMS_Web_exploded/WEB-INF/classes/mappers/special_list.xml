@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="speciallistmapper">
+    <select id = "selectSpecialListBlack"  resultType="com.tudublin.apms.entity.SpecialList">
+        select DISTINCT *
+        from special_list
+        where status = 0
+        order by sl_id
+    </select>
+    <select id = "selectSpecialListWhite"  resultType="com.tudublin.apms.entity.SpecialList">
+        select DISTINCT *
+        from special_list
+        where status = 1
+        order by sl_id
+    </select>
+    <insert id="insertUserSpecialList" parameterType="com.tudublin.apms.entity.SpecialList">
+        INSERT INTO `special_list` (`user_name`,`vehicle_reg_num`,`comment`,`status`)
+        VALUES (#{userName},#{vehicleRegNum}, #{comment},#{status});
+        <selectKey resultType="Long" keyProperty="slId" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <select id = "selectSpecialListByUserName"  parameterType="String" resultType="com.tudublin.apms.entity.SpecialList">
+        select DISTINCT *
+        from special_list
+        where user_name = #{value}
+        order by sl_id
+    </select>
+
+    <delete id="deleteSpecialListBySLId" parameterType="String" >
+        delete from special_list
+        where sl_id = #{value}
+    </delete>
+
+    <select id = "selectSpecialListByVRN"  parameterType="String" resultType="com.tudublin.apms.entity.SpecialList">
+        select DISTINCT *
+        from special_list
+        where vehicle_reg_num = #{value}
+        order by sl_id
+    </select>
+</mapper>

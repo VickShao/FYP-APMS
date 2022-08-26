@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="detailsMapper">
+    <select id="selectById" parameterType="Long" resultType="com.tudublin.apms.entity.Details">
+        select * from user_details where details_id = #{value}
+    </select>
+
+    <insert id="insertUserDetails" parameterType="com.tudublin.apms.entity.Details">
+        INSERT INTO `user_details` (`name`,`email`,`phone`)
+        VALUES (#{name},#{email}, #{phone});
+        <selectKey resultType="Long" keyProperty="detailsId" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+</mapper>

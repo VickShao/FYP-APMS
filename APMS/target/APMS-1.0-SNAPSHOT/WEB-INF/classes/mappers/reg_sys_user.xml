@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adduserslmapper">
+    <insert id="insertUserSpecialList" parameterType="com.tudublin.apms.entity.User">
+        INSERT INTO `special_list` (`user_id`,`vehicle_reg_num`,`comment`,`status`)
+        VALUES (#{userId},#{vehicleRegNum}, #{comment},#{status});
+        <selectKey resultType="Long" keyProperty="slId" order="AFTER">
+            select lasr_insert_id()
+        </selectKey>
+    </insert>
+</mapper>

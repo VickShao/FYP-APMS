@@ -1,0 +1,10 @@
+com\tudublin\apms\service\ParkingRecordServiceTest.class
+com\tudublin\apms\service\RbacServiceTest.class
+com\tudublin\apms\service\UserPaymentServiceTest.class
+com\tudublin\apms\utils\Md5UtilsTest.class
+MybatisUtilsTestor.class
+com\tudublin\apms\service\SpecialListServiceTest.class
+com\tudublin\apms\service\UserVRNServiceTest.class
+com\tudublin\apms\service\UserServiceTest.class
+com\tudublin\apms\service\DetailsServiceTest.class
+com\tudublin\apms\utils\ResponseUtilsTest.class

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="parkingrecordmapper">
+    <select id = "selectAllParkingRecord"  resultType="com.tudublin.apms.entity.ParkingRecord">
+        select DISTINCT *
+        from pk_record
+        order by pk_record_id
+    </select>
+    <select id = "selectPaidParkingRecord"  resultType="com.tudublin.apms.entity.ParkingRecord">
+        select DISTINCT *
+        from pk_record
+        where if_paid = 1
+        order by pk_record_id
+    </select>
+    <select id = "selectUnpaidParkingRecord"  resultType="com.tudublin.apms.entity.ParkingRecord">
+        select DISTINCT *
+        from pk_record
+        where if_paid = 0
+        order by pk_record_id
+    </select>
+    <select id = "selectAllParkingRecordByVRN" parameterType="String" resultType="com.tudublin.apms.entity.ParkingRecord">
+        select DISTINCT *
+        from pk_record
+        where vehicle_reg_num = #{value}
+        order by pk_record_id
+    </select>
+    <select id = "selectUnpaidParkingRecordByVRN" parameterType="String" resultType="com.tudublin.apms.entity.ParkingRecord">
+        select DISTINCT *
+        from pk_record
+        where vehicle_reg_num = #{value} AND if_paid = 0
+        order by pk_record_id;
+<!--        <selectKey resultType="Long" keyProperty="slId" order="AFTER">-->
+<!--            select last_insert_id()-->
+<!--        </selectKey>-->
+    </select>
+
+    <update id="updateOneParkingRecord" parameterType="com.tudublin.apms.entity.ParkingRecord">
+        update pk_record SET payment = #{payment}, if_paid = 1 where pk_record_id = #{PkRecordId}
+    </update>
+</mapper>
